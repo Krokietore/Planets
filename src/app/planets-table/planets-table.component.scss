@@ -1,0 +1,42 @@
+:host {
+  width: 100%;
+  text-transform: uppercase;
+}
+
+
+table, .mat-elevation-z8 {
+  width: 100%;
+
+  .mat-cell, .mat-header-cell {
+    font-size: 16px;
+    color: #e3bb02;
+    border-color: #e3bb02;
+  }
+
+  .mat-header-cell {
+    font-weight: bold;
+  }
+
+  .rowgroup {
+    border-bottom-color: #e3bb02;
+  }
+
+  > * {
+    background-color: transparent;
+    color: #e3bb02!important;
+  }
+
+  .mat-row:hover {
+    cursor: pointer;
+  }
+
+
+  ::ng-deep {
+    .mat-select-value-text {
+      color: #e3bb02!important;
+    }
+  }
+}
+
+
+
