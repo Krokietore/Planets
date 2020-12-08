@@ -1,33 +1,37 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" [hidden]="choosenPlanet">
   <table mat-table [dataSource]="dataSource">
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Planet Name </th>
+      <th mat-header-cell *matHeaderCellDef> Planet Name</th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
     <!-- Climate Column -->
     <ng-container matColumnDef="climate">
-      <th mat-header-cell *matHeaderCellDef> Climate </th>
+      <th mat-header-cell *matHeaderCellDef> Climate</th>
       <td mat-cell *matCellDef="let element"> {{element.climate}} </td>
     </ng-container>
 
     <!-- Terrain Column -->
     <ng-container matColumnDef="terrain">
-      <th mat-header-cell *matHeaderCellDef> Terrain </th>
+      <th mat-header-cell *matHeaderCellDef> Terrain</th>
       <td mat-cell *matCellDef="let element"> {{element.terrain}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row
         *matRowDef="let row; columns: displayedColumns;"
-        (click)="openSelectedPlanet(row)">
+        (click)="showPlanetInfo(row)">
     </tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="tableSizes"
                  [length]="lengthOfArray"
-                 (page)="changePage($event)"
   ></mat-paginator>
 </div>
+
+<app-planet-info *ngIf="choosenPlanet"
+                 [planet]="choosenPlanet"
+                 (closeInfo)="closePlanetInfo()"
+></app-planet-info>

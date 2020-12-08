@@ -14,39 +14,54 @@ import {tableSizes} from '../../models/tableSizes';
 export class PlanetsTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'climate', 'terrain'];
   currentResponse: PlanetsResponse;
-  @ViewChild(MatPaginator, {read: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   dataSource: MatTableDataSource<Planet> = new MatTableDataSource<Planet>();
   tableSizes = [tableSizes.small, tableSizes.medium, tableSizes.big];
-  lengthOfArray = 0;
+  lengthOfArray: number;
+  choosenPlanet: Planet;
 
   constructor(private planetsService: PlanetsService) {
   }
 
   ngOnInit(): void {
-    this.getInitialPlanetsList();
+    this.getPlanets();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  getPlanets(page?: number): void {
+  getPlanets(page = 1, planetsTable: Planet[] = []): void {
     this.planetsService.getPlanetsByPage(page).subscribe((param) => {
-      this.currentResponse = param;
-      this.lengthOfArray = this.currentResponse.count;
-      this.dataSource.data = this.currentResponse.results;
+      planetsTable = planetsTable.concat(param.results);
+      if (param.next) {
+        this.getPlanets(++page, planetsTable);
+      } else {
+        planetsTable = this.sortPlanetList(planetsTable);
+        this.dataSource.data = planetsTable;
+        this.lengthOfArray = planetsTable.length;
+      }
     });
   }
 
-  changePage(event): void {
-    this.getPlanets(event.pageIndex + 1);
+  sortPlanetList(value): Planet[] {
+    value.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+    return value;
   }
 
-  getInitialPlanetsList(): void {
-    this.getPlanets();
+  showPlanetInfo(planet): void {
+    this.choosenPlanet = planet;
   }
 
-  openSelectedPlanet(row): void {
-    console.log(row);
+  closePlanetInfo(): void {
+    this.choosenPlanet = null;
   }
 }
