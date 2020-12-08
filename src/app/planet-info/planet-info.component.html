@@ -1,0 +1,9 @@
+<div *ngIf="planet">
+
+  <div *ngFor="let info of planet | keyvalue; let i = index">
+    {{info.key}}: {{info.value}}
+  </div>
+
+  <button class="close" (click)="closePlanetInfo()">back</button>
+
+</div>
