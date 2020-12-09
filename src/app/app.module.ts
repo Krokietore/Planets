@@ -10,6 +10,9 @@ import { PlanetsTableComponent } from './planets-table/planets-table.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { PlanetInfoComponent } from './planet-info/planet-info.component';
+import {FilmsService} from '../services/films.service';
+import {MatLineModule} from '@angular/material/core';
+import {ResidentsService} from '../services/residents.service';
 
 
 @NgModule({
@@ -24,9 +27,10 @@ import { PlanetInfoComponent } from './planet-info/planet-info.component';
     MatSliderModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatLineModule
   ],
-  providers: [PlanetsService],
+  providers: [PlanetsService, FilmsService, ResidentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

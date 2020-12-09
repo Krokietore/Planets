@@ -43,3 +43,24 @@
     flex-wrap: wrap;
   }
 }
+
+p, h3 {
+  margin: 0;
+}
+
+.list-label {
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+mat-list-item {
+  font-size: 16px;
+}
+
+
+@media (max-width: 1200px) {
+  :host {
+    padding: 0;
+    flex-wrap: wrap;
+  }
+}

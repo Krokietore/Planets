@@ -1,8 +1,32 @@
 <div *ngIf="planet">
 
-  <div *ngFor="let info of planet | keyvalue; let i = index">
-    {{info.key}}: {{info.value}}
-  </div>
+  <p>Name: {{planet.name}}</p>
+  <p>Climate: {{planet.climate}}</p>
+  <p>Diameter: {{planet.diameter}}</p>
+  <p>Gravity: {{planet.gravity}}</p>
+  <p>Orbital period: {{planet.orbital_period}}</p>
+  <p>Population: {{planet.population}}</p>
+  <p>Rotation period: {{planet.rotation_period}}</p>
+  <p>Surface water: {{planet.surface_water}}</p>
+  <p>Terrain: {{planet.terrain}}</p>
+
+  <ng-container *ngIf="films?.length > 0">
+    <p class="list-label">Films:</p>
+    <mat-list>
+      <mat-list-item *ngFor="let film of films">
+        <p matLine> {{film.title}} ({{film.director}} - {{film.release_date}})</p>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
+
+  <ng-container *ngIf="residents?.length > 0">
+    <p class="list-label">Residents:</p>
+    <mat-list>
+      <mat-list-item *ngFor="let resident of residents">
+        <p matLine> {{resident.name}}</p>
+      </mat-list-item>
+    </mat-list>
+  </ng-container>
 
   <button class="close" (click)="closePlanetInfo()">back</button>
 
